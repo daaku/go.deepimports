@@ -7,6 +7,7 @@ import (
 
 const aPath = "github.com/daaku/go.deepimports/_test/a"
 const bPath = "github.com/daaku/go.deepimports/_test/b"
+const cPath = "github.com/daaku/go.deepimports/_test/c"
 
 func TestFind(t *testing.T) {
 	paths := []string{aPath}
@@ -14,14 +15,17 @@ func TestFind(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(r) != 2 {
-		t.Fatalf("expected 2 imports got %d", len(r))
+	if len(r) != 3 {
+		t.Fatalf("expected 3 imports got %d", len(r))
 	}
 	if r[0].ImportPath != aPath {
 		t.Fatalf("expected %s got %s", aPath, r[0].ImportPath)
 	}
 	if r[1].ImportPath != bPath {
 		t.Fatalf("expected %s got %s", bPath, r[1].ImportPath)
+	}
+	if r[2].ImportPath != cPath {
+		t.Fatalf("expected %s got %s", cPath, r[2].ImportPath)
 	}
 }
 
@@ -31,10 +35,13 @@ func TestFindImportsOnly(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(r) != 1 {
-		t.Fatalf("expected 1 imports got %d", len(r))
+	if len(r) != 2 {
+		t.Fatalf("expected 2 imports got %d", len(r))
 	}
 	if r[0].ImportPath != bPath {
 		t.Fatalf("expected %s got %s", bPath, r[0].ImportPath)
+	}
+	if r[1].ImportPath != cPath {
+		t.Fatalf("expected %s got %s", cPath, r[1].ImportPath)
 	}
 }
