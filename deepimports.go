@@ -40,6 +40,9 @@ func (r *recursiveImports) analyzeAll() error {
 }
 
 func (r *recursiveImports) analyzePackage(importPath string, given bool) error {
+	if importPath == "C" {
+		return nil
+	}
 	if r.done[importPath] {
 		return nil
 	}

@@ -45,3 +45,14 @@ func TestFindImportsOnly(t *testing.T) {
 		t.Fatalf("expected %s got %s", cPath, r[1].ImportPath)
 	}
 }
+
+func TestIgnoresC(t *testing.T) {
+	paths := []string{"github.com/daaku/go.deepimports/_test/d"}
+	r, err := deepimports.FindImportsOnly(paths, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(r) != 0 {
+		t.Fatalf("expected 0 imports got %d", len(r))
+	}
+}
